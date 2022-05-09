@@ -6,7 +6,7 @@ FPS = 144
 WIDTH = 800
 HEIGHT = 800
 TITLE = "Elastic Collisions"
-MIN_RAD, MAX_RAD = 10, 20
+MIN_RAD, MAX_RAD = 15, 30
 MAX_VEL = 15
 
 # Colours

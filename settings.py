@@ -5,7 +5,7 @@ import pygame
 FPS = 144 
 WIDTH = 800
 HEIGHT = 800
-TITLE = "Elastic Collisions"
+TITLE = "ElastiCollisions"
 MIN_RAD, MAX_RAD = 15, 30
 MAX_VEL = 15
 

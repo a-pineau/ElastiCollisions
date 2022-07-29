@@ -1,3 +1,3 @@
-# v0lem0n
+# ElastiCollisions
 
 ![ElasticCollisions](imgs/Stack.gif)

@@ -3,12 +3,13 @@ import random
 import pygame as pg
 import math
 
+
 from particle import Particle
 from settings import *
 
 vec = pg.math.Vector2
 # Manually places the window at coords (x, y)
-os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (100, 100)
+os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (300, 0)
 
 class Simulation:
     def __init__(self, n_particles=10, record=False) -> None:
@@ -102,8 +103,9 @@ class Simulation:
     def events(self):
         # Closing simulation
         for event in pg.event.get():
-            if event.type == pg.QUIT:
-                self.running = False
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_q:
+                    self.running = False
                     
     def display(self):
         # Simulation display
@@ -120,7 +122,6 @@ class Simulation:
     def save_results(self, extension="png") -> None:
         file_name = f"snapshot_{self.n_frame}.{extension}"
         pygame.image.save(self.screen, os.path.join(SNAP_FOLDER, file_name))
-
 
 def main():
     sim = Simulation(n_particles=50, record=True)

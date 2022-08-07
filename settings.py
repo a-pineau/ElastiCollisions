@@ -2,7 +2,7 @@ import os
 import pygame
 
 # Settings
-FPS = 144 
+FPS = 60
 WIDTH = 800
 HEIGHT = 800
 TITLE = "ElastiCollisions"

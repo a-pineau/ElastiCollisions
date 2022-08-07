@@ -9,7 +9,7 @@ from settings import *
 
 vec = pg.math.Vector2
 # Manually places the window at coords (x, y)
-os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (300, 0)
+os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (300, 100)
 
 class Simulation:
     def __init__(self, n_particles=10, record=False) -> None:
@@ -26,7 +26,7 @@ class Simulation:
         self.record = record
     
     def new(self):
-        # Building a new simulation
+        """Builds a new simulation"""
         try:
             os.mkdir(SNAP_FOLDER)
         except FileExistsError:
@@ -55,7 +55,7 @@ class Simulation:
                     break
 
     def handle_collisions(self):
-        # Collisions handler
+        """Collisions handler"""
         for i, p in enumerate(self.particles):
             for other in self.particles[i+1:]:
                 if p.overlaps(other): 
@@ -63,6 +63,7 @@ class Simulation:
                     self.elastic_collisions(p, other)
                 
     def elastic_collisions(self, p1, p2):
+        """Computes elastic collisions"""
         x1, x2 = p1.pos, p2.pos 
         m1, m2 = p1.r**2, p2.r**2
         M = m1 + m2
@@ -85,7 +86,7 @@ class Simulation:
         p2.pos.y -= disp * (n.y / d)
         
     def run(self):
-        # Game loop
+        """Game loop."""
         while self.running: 
             self.clock.tick(FPS)
             self.events()
@@ -94,21 +95,22 @@ class Simulation:
             if self.record: self.save_results()
     
     def update(self):
-        # Simulation loop update
+        """Simulation loop updates"""
         self.n_frame += 1
         for p in self.particles:
             p.update()
         self.handle_collisions() 
 
     def events(self):
-        # Closing simulation
+        """Events handler"""
         for event in pg.event.get():
-            if event.type == pg.KEYDOWN:
-                if event.key == pg.K_q:
-                    self.running = False
+            if event.type == pg.QUIT:
+                self.running = False
+            if event.type == pg.KEYDOWN and event.key == pg.K_q:
+                self.running = False
                     
     def display(self):
-        # Simulation display
+        """Simulation display"""
         self.screen.fill(BACKGROUND)
         self.screen.blit(
             pygame.font.SysFont("Calibri", 35).render(f"Collisions: {self.n_collisions}", 
@@ -124,7 +126,7 @@ class Simulation:
         pygame.image.save(self.screen, os.path.join(SNAP_FOLDER, file_name))
 
 def main():
-    sim = Simulation(n_particles=50, record=True)
+    sim = Simulation(n_particles=50, record=False)
     sim.new()
     sim.run()
     pg.quit()

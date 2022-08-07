@@ -2,4 +2,4 @@
 
 Simple simulation handling elastic collisions of balls.
 
-![ElasticCollisions](imgs/Stack.gif)
+![ElastiCollisions](imgs/Stack.gif)

@@ -1,4 +1,4 @@
-# ElastiCollisions
+# About
 
 Simple simulation handling elastic collisions of balls.\
 Requirements:\
